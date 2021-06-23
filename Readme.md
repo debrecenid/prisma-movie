@@ -14,7 +14,7 @@ $ npx prisma generate client
 $ npx prisma migrate dev --name init
 
 #run seeder
-$ prisma db seed --preview-feature
+$ npx prisma db seed --preview-feature
 ```
 ### Commands
 ```bash
