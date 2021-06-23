@@ -1,4 +1,5 @@
 import 'source-map-support/register';
+import 'reflect-metadata';
 
 // std
 import * as http from 'http';
@@ -9,8 +10,11 @@ import { Config, createApp, displayServerURL } from '@foal/core';
 // App
 import { AppController } from './app/app.controller';
 
+// Apollo Server
+import { getApolloMiddleware } from './apollo'
+
 async function main() {
-  const app = await createApp(AppController);
+  const app = await createApp(AppController, { preMiddlewares: [getApolloMiddleware()] });
 
   const httpServer = http.createServer(app);
   const port = Config.get('port', 'number', 3001);

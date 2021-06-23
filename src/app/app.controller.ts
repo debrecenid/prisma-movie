@@ -1,14 +1,12 @@
-import { controller, IAppController } from '@foal/core';
-import { createConnection } from 'typeorm';
+import { IAppController, dependency } from '@foal/core';
 
-import { ApiController } from './controllers';
+import { PrismaService } from './services'
 
 export class AppController implements IAppController {
-  subControllers = [
-    controller('/api', ApiController),
-  ];
+  @dependency
+  prisma: PrismaService
 
   async init() {
-    await createConnection();
+    await this.prisma.$connect()
   }
 }

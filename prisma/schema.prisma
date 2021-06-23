@@ -1,0 +1,35 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/generated/typegraphql-prisma"
+}
+
+model Person {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String
+  born      DateTime
+  died      DateTime
+  movies    Movie[]
+}
+
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String
+  movies Movie[]
+}
+
+model Movie {
+  id         Int        @id @default(autoincrement())
+  title      String
+  categories Category[]
+  actors     Person[]
+}

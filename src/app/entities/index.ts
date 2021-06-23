@@ -1,1 +1,2 @@
-export { User } from './user.entity';
+export { Movie } from './movie.entity'
+
